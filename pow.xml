@@ -1,0 +1,27 @@
+<dependencies>
+    <!-- Dependencia para Spring Boot -->
+    <dependency>
+        <groupId>org.springframework.boot</groupId>
+        <artifactId>spring-boot-starter-data-jpa</artifactId>
+    </dependency>
+
+    <!-- Dependencia para Spring Web -->
+    <dependency>
+        <groupId>org.springframework.boot</groupId>
+        <artifactId>spring-boot-starter-web</artifactId>
+    </dependency>
+
+    <!-- Dependencia para MySQL Driver -->
+    <dependency>
+        <groupId>mysql</groupId>
+        <artifactId>mysql-connector-java</artifactId>
+    </dependency>
+
+    <!-- Dependencia para Hibernate (incluida en la dependencia de spring-boot-starter-data-jpa) -->
+    <!-- No necesitas agregarla explícitamente, pero si quieres una versión específica de Hibernate puedes hacerlo -->
+    <dependency>
+        <groupId>org.hibernate</groupId>
+        <artifactId>hibernate-core</artifactId>
+        <version>5.4.27.Final</version>
+    </dependency>
+</dependencies>
