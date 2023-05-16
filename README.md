@@ -109,3 +109,45 @@ public class AlumnoController {
 ---
 
 Asegúrate de crear también los archivos para las otras entidades, repositorios y controladores. Este es solo un ejemplo básico y no cubre todas las relaciones entre las entidades. En una aplicación real, tendrías que manejar las relaciones de muchos a muchos y quizás crear tablas de unión adicionales.
+
+--- 
+
+## Agregar las Dependencias
+Para agregar las dependencias necesarias a tu proyecto Spring Boot, debes editar tu archivo pom.xml e incluir las dependencias correspondientes. Aquí te muestro cómo :
+
+```xml
+<dependencies>
+    <!-- Dependencia para Spring Boot -->
+    <dependency>
+        <groupId>org.springframework.boot</groupId>
+        <artifactId>spring-boot-starter-data-jpa</artifactId>
+    </dependency>
+
+    <!-- Dependencia para Spring Web -->
+    <dependency>
+        <groupId>org.springframework.boot</groupId>
+        <artifactId>spring-boot-starter-web</artifactId>
+    </dependency>
+
+    <!-- Dependencia para MySQL Driver -->
+    <dependency>
+        <groupId>mysql</groupId>
+        <artifactId>mysql-connector-java</artifactId>
+    </dependency>
+
+    <!-- Dependencia para Hibernate (incluida en la dependencia de spring-boot-starter-data-jpa) -->
+    <!-- No necesitas agregarla explícitamente, pero si quieres una versión específica de Hibernate puedes hacerlo -->
+    <dependency>
+        <groupId>org.hibernate</groupId>
+        <artifactId>hibernate-core</artifactId>
+        <version>5.4.27.Final</version>
+    </dependency>
+</dependencies>
+```
+
+Después de editar tu archivo pom.xml , deberás actualizar tu proyecto para que las nuevas dependencias se descarguen e incluyan en tu proyecto.
+
+>Nota: Las versiones específicas de las dependencias dependerán de las versiones de las bibliotecas que estés utilizando en tu proyecto. Estos son solo ejemplos y pueden no ser las últimas versiones disponibles. Te sugeriría que verifiques las últimas versiones de las dependencias en Maven Central o en los repositorios oficiales.
+
+---
+
