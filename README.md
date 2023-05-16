@@ -287,3 +287,55 @@ Ten en cuenta que este es un ejemplo simplificado y podrías necesitar adaptarlo
 
 --- 
 
+## Crear los repositorios JPA para manejar las operaciones de base de datos.
+
+Para manejar las operaciones de la base de datos, puedes crear repositorios JPA extendiendo la interfaz `JpaRepository`. Esto proporcionará métodos CRUD (Crear, Leer, Actualizar, Borrar) básicos para las entidades.
+
+Aquí tienes un ejemplo para las entidades Alumno, Nota, Asignatura, y Curso:
+
+### AlumnoRepository.java (que ya teníamos de un paso anterior)
+
+```java
+import org.springframework.data.jpa.repository.JpaRepository;
+
+public interface AlumnoRepository extends JpaRepository<Alumno, Long> {
+}
+```
+
+### NotaRepository.java
+
+```java
+import org.springframework.data.jpa.repository.JpaRepository;
+
+public interface NotaRepository extends JpaRepository<Nota, Long> {
+}
+```
+
+### AsignaturaRepository.java
+
+```java
+import org.springframework.data.jpa.repository.JpaRepository;
+
+public interface AsignaturaRepository extends JpaRepository<Asignatura, Long> {
+}
+```
+
+### CursoRepository.java
+
+```java
+import org.springframework.data.jpa.repository.JpaRepository;
+
+public interface CursoRepository extends JpaRepository<Curso, Long> {
+}
+```
+
+Estos repositorios proporcionan métodos como `save()`, `findOne()`, `findAll()`, `count()`, `delete()`, entre otros, que puedes usar para realizar operaciones de base de datos.
+
+Además, puedes agregar tus propios métodos personalizados a estos repositorios. Por ejemplo, si deseas encontrar a todos los alumnos con un cierto nombre, podrías agregar un método `findByNombre(String nombre)` al `AlumnoRepository`.
+
+Por último, recuerda que debes anotar tus repositorios con `@Repository` para que Spring los pueda detectar automáticamente.
+
+--- 
+
+
+
