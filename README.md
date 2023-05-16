@@ -7,7 +7,7 @@ Nota: este es un ejemplo simplificado y no abarca todos los detalles que podría
 Pasos generales
 
 1. Configura tu entorno de desarrollo de Eclipse para el desarrollo de Spring Boot.
-2. Crea un nuevo proyecto Spring Starter Project.
+2. Crea un nuevo proyecto Spring Starter Project, que complie un WAR y use Maven.
 3. Agrega las dependencias necesarias: Spring Web, Spring Data JPA, MySQL Driver, Hibernate.
 4. Configura tu archivo application.properties para conectar a tu base de datos MySQL.
 5. Crea las entidades JPA (Alumno, Nota, Asignatura, Curso).
