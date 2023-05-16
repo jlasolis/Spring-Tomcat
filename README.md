@@ -7,7 +7,7 @@ Nota: este es un ejemplo simplificado y no abarca todos los detalles que podría
 Pasos generales
 
 1. Configura tu entorno de desarrollo de Eclipse para el desarrollo de Spring Boot.
-2. Crea un nuevo proyecto Spring Starter Project.
+2. Crea un nuevo proyecto Spring Starter Project, que complie un WAR y use Maven.
 3. Agrega las dependencias necesarias: Spring Web, Spring Data JPA, MySQL Driver, Hibernate.
 4. Configura tu archivo application.properties para conectar a tu base de datos MySQL.
 5. Crea las entidades JPA (Alumno, Nota, Asignatura, Curso).
@@ -281,7 +281,7 @@ La anotación `@Entity` indica que la clase es una entidad JPA.
 La anotación `@Id` indica el campo que será la clave primaria de la entidad.
 La anotación `@GeneratedValue` indica que el proveedor de persistencia debe generar un valor para el campo.
 La anotación `@ManyToOne` indica una relación de muchos a uno entre las entidades. En este caso, muchas notas pueden pertenecer a un alumno o a una asignatura.
-La anotación `@ManyToMan`y indica una relación de muchos a muchos. En este caso, un curso puede tener muchas asignaturas y una asignatura puede estar en muchos cursos.
+La anotación `@ManyToMany` indica una relación de muchos a muchos. En este caso, un curso puede tener muchas asignaturas y una asignatura puede estar en muchos cursos.
 
 Ten en cuenta que este es un ejemplo simplificado y podrías necesitar adaptarlo a tus necesidades específicas, incluyendo el manejo de las relaciones entre las entidades.
 
@@ -521,34 +521,3 @@ export class AlumnosComponent implements OnInit {
 En este caso, te suscribes al `Observable` devuelto por `getAlumnos()` y actualizas el array `alumnos` con los datos obtenidos cuando están disponibles.
 
 Por último, recuerda que debes tener en cuenta la política de origen mismo (same-origin policy) y la política de CORS (Cross-Origin Resource Sharing) cuando hagas solicitudes entre diferentes dominios o puertos. En un entorno de desarrollo, Spring Boot y Angular a menudo se ejecutan en diferentes puertos, por lo que necesitarás configurar CORS en tu servidor Spring Boot para permitir las solicitudes desde el puerto donde se ejecuta Angular.
-
-
-
----
-
-Para comenzar un proyecto Spring Boot con Eclipse, sigue estos pasos:
-
-1. **Instala y configura Eclipse y Spring Tools Suite (STS):**
-   Eclipse es un IDE ampliamente utilizado para el desarrollo en Java. STS es un conjunto de herramientas que facilita el desarrollo de aplicaciones Spring. Puedes agregar STS a Eclipse a través del Eclipse Marketplace.
-
-2. **Crea un nuevo proyecto Spring Starter:**
-   Con STS instalado, puedes crear un nuevo proyecto Spring Starter. Para hacerlo, ve a `File -> New -> Spring Starter Project`. Luego, llena los detalles del proyecto, como el nombre, el paquete base y la versión de Java.
-
-3. **Selecciona las dependencias necesarias para tu proyecto:**
-   En la pantalla `New Spring Starter Project Dependencies`, puedes seleccionar las dependencias que necesitas para tu proyecto. Para el ejemplo que estás trabajando, necesitarías seleccionar `Spring Web`, `Spring Data JPA`, y `MySQL Driver`.
-
-4. **Crea las entidades JPA (Alumno, Nota, Asignatura, Curso):**
-   En tu paquete base (o un subpaquete de tu elección), crea las clases que representarán tus entidades en la base de datos. Estas clases deben estar anotadas con `@Entity` y deben tener campos para todas las columnas de la tabla correspondiente en la base de datos.
-
-5. **Crea los repositorios JPA:**
-   Crea interfaces para cada una de tus entidades que extiendan `JpaRepository`. Estas interfaces te proporcionan métodos para realizar operaciones de base de datos en tus entidades.
-
-6. **Crea los servicios:**
-   Crea clases de servicio que contengan tu lógica empresarial. Estas clases deben inyectar tus repositorios y usarlos para interactuar con la base de datos.
-
-7. **Crea los controladores:**
-   Finalmente, crea los controladores que manejarán las solicitudes HTTP. Estos controladores deben inyectar tus servicios y usarlos para responder a las solicitudes.
-
-8. **Ejecuta el proyecto:**
-   Una vez que hayas creado todas tus clases, puedes ejecutar el proyecto haciendo clic derecho en la clase principal (la que tiene el método `main` y la anotación `@SpringBootApplication`) y seleccionando `Run As -> Spring Boot App`.
-
