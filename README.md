@@ -337,5 +337,49 @@ Por último, recuerda que debes anotar tus repositorios con `@Repository` para q
 
 --- 
 
+## Creación de la capa empresarial
 
+La capa de servicio es donde se maneja la lógica empresarial en una aplicación Spring. Aunque no es obligatorio, proporciona una buena separación de responsabilidades en tu aplicación.
+
+A continuación, se muestra un ejemplo de cómo podrían ser los servicios para las entidades Alumno, Nota, Asignatura y Curso.
+
+### AlumnoService.java
+
+```java
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+
+import java.util.List;
+
+@Service
+public class AlumnoService {
+
+    private final AlumnoRepository alumnoRepository;
+
+    @Autowired
+    public AlumnoService(AlumnoRepository alumnoRepository) {
+        this.alumnoRepository = alumnoRepository;
+    }
+
+    public List<Alumno> findAll() {
+        return alumnoRepository.findAll();
+    }
+
+    public Alumno save(Alumno alumno) {
+        return alumnoRepository.save(alumno);
+    }
+
+    public void delete(Long id) {
+        alumnoRepository.deleteById(id);
+    }
+
+    // ... otros métodos según sea necesario
+}
+```
+
+Haz lo mismo para Nota, Asignatura y Curso. En cada servicio, inyecta el repositorio correspondiente usando la anotación `@Autowired` y define los métodos que necesites.
+
+Estos métodos luego pueden ser llamados desde los controladores para realizar las operaciones necesarias. Recuerda que la lógica empresarial más compleja debe ir en esta capa de servicio, en lugar de en los controladores o repositorios.
+
+Por último, la anotación `@Service` es necesaria para que Spring pueda detectar y autowire estos servicios donde sea necesario.
 
