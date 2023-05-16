@@ -440,3 +440,84 @@ En este código:
 - El método `ResponseEntity.ok()` se utiliza para crear una respuesta HTTP con el código de estado 200 (OK).
 
 Recuerda que los controladores deben ser lo más delgados posible y delegar la lógica empresarial a los servicios. Esto garantiza una separación clara de las responsabilidades y hace que el código sea más fácil de mantener y probar.
+
+---
+
+## ejemplo de como llamar a esta solicitud http desde angular suponiendo que llamamos a un localhost en el puerto 8080
+
+Para hacer una solicitud HTTP desde Angular a un servidor de Spring Boot que se ejecuta en `localhost:8080`, puedes usar el servicio `HttpClient` proporcionado por Angular. Aquí tienes un ejemplo de cómo hacerlo.
+
+Primero, asegúrate de importar el módulo `HttpClientModule` en tu módulo principal de Angular (usualmente `app.module.ts`):
+
+```typescript
+import { HttpClientModule } from '@angular/common/http';
+
+@NgModule({
+  declarations: [
+    // tus componentes aquí
+  ],
+  imports: [
+    BrowserModule,
+    HttpClientModule
+    // otros módulos aquí
+  ],
+  providers: [],
+  bootstrap: [AppComponent]
+})
+export class AppModule { }
+```
+
+A continuación, inyecta el servicio `HttpClient` en tu componente o servicio (en nuestro codigo sera `servicioConexion.ts`) donde quieras hacer la solicitud HTTP. Aquí tienes un ejemplo de cómo podrías hacer una solicitud GET para obtener todos los alumnos:
+
+```typescript
+import { HttpClient } from '@angular/common/http';
+import { Injectable } from '@angular/core';
+import { Observable } from 'rxjs';
+
+@Injectable({
+  providedIn: 'root',
+})
+export class AlumnoService {
+  private url = 'http://localhost:8080/alumnos';
+
+  constructor(private http: HttpClient) {}
+
+  getAlumnos(): Observable<Alumno[]> {
+    return this.http.get<Alumno[]>(this.url);
+  }
+}
+```
+
+En este código:
+
+- `http://localhost:8080/alumnos` es la URL del endpoint de tu API que quieres llamar.
+- `http.get<Alumno[]>(this.url)` hace una solicitud GET a la URL y espera una respuesta que sea un array de objetos `Alumno`.
+- `Observable<Alumno[]>` es el tipo de objeto que `http.get()` devuelve. Un `Observable` es un tipo especial de objeto que puedes "suscribirte" para recibir actualizaciones cuando los datos estén disponibles.
+
+Para usar este servicio en un componente y mostrar los datos obtenidos, podrías hacer algo como esto:
+
+```typescript
+import { Component, OnInit } from '@angular/core';
+import { AlumnoService } from './alumno.service';
+
+@Component({
+  selector: 'app-alumnos',
+  templateUrl: './alumnos.component.html',
+  styleUrls: ['./alumnos.component.css']
+})
+export class AlumnosComponent implements OnInit {
+  alumnos: Alumno[];
+
+  constructor(private alumnoService: AlumnoService) { }
+
+  ngOnInit() {
+    this.alumnoService.getAlumnos().subscribe(data => {
+      this.alumnos = data;
+    });
+  }
+}
+```
+
+En este caso, te suscribes al `Observable` devuelto por `getAlumnos()` y actualizas el array `alumnos` con los datos obtenidos cuando están disponibles.
+
+Por último, recuerda que debes tener en cuenta la política de origen mismo (same-origin policy) y la política de CORS (Cross-Origin Resource Sharing) cuando hagas solicitudes entre diferentes dominios o puertos. En un entorno de desarrollo, Spring Boot y Angular a menudo se ejecutan en diferentes puertos, por lo que necesitarás configurar CORS en tu servidor Spring Boot para permitir las solicitudes desde el puerto donde se ejecuta Angular.
