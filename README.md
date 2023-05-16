@@ -281,7 +281,7 @@ La anotación `@Entity` indica que la clase es una entidad JPA.
 La anotación `@Id` indica el campo que será la clave primaria de la entidad.
 La anotación `@GeneratedValue` indica que el proveedor de persistencia debe generar un valor para el campo.
 La anotación `@ManyToOne` indica una relación de muchos a uno entre las entidades. En este caso, muchas notas pueden pertenecer a un alumno o a una asignatura.
-La anotación `@ManyToMan`y indica una relación de muchos a muchos. En este caso, un curso puede tener muchas asignaturas y una asignatura puede estar en muchos cursos.
+La anotación `@ManyToMany` indica una relación de muchos a muchos. En este caso, un curso puede tener muchas asignaturas y una asignatura puede estar en muchos cursos.
 
 Ten en cuenta que este es un ejemplo simplificado y podrías necesitar adaptarlo a tus necesidades específicas, incluyendo el manejo de las relaciones entre las entidades.
 
