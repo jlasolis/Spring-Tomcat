@@ -383,3 +383,60 @@ Estos métodos luego pueden ser llamados desde los controladores para realizar l
 
 Por último, la anotación `@Service` es necesaria para que Spring pueda detectar y autowire estos servicios donde sea necesario.
 
+
+---
+
+## Creación de los controladores para manejar la solicitudes HTTP
+
+Los controladores en Spring se utilizan para manejar las solicitudes HTTP y enviar respuestas al cliente. Aquí tienes un ejemplo de cómo podrían ser los controladores para las entidades Alumno, Nota, Asignatura y Curso.
+
+### AlumnoController.java
+
+```java
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.*;
+
+import java.util.List;
+
+@RestController
+@RequestMapping("/alumnos")
+public class AlumnoController {
+
+    private final AlumnoService alumnoService;
+
+    @Autowired
+    public AlumnoController(AlumnoService alumnoService) {
+        this.alumnoService = alumnoService;
+    }
+
+    @GetMapping
+    public ResponseEntity<List<Alumno>> getAllAlumnos() {
+        return ResponseEntity.ok(alumnoService.findAll());
+    }
+
+    @PostMapping
+    public ResponseEntity<Alumno> createAlumno(@RequestBody Alumno alumno) {
+        return ResponseEntity.ok(alumnoService.save(alumno));
+    }
+
+    @DeleteMapping("/{id}")
+    public ResponseEntity<Void> deleteAlumno(@PathVariable Long id) {
+        alumnoService.delete(id);
+        return ResponseEntity.ok().build();
+    }
+
+    // ... otros métodos según sea necesario
+}
+```
+
+Puedes hacer algo similar para Nota, Asignatura y Curso.
+
+En este código:
+
+- La anotación `@RestController` indica que la clase es un controlador REST.
+- La anotación `@RequestMapping` define la URL base para todas las operaciones del controlador.
+- Las anotaciones `@GetMapping`, `@PostMapping`, y `@DeleteMapping` definen operaciones para las solicitudes HTTP GET, POST, y DELETE, respectivamente.
+- El método `ResponseEntity.ok()` se utiliza para crear una respuesta HTTP con el código de estado 200 (OK).
+
+Recuerda que los controladores deben ser lo más delgados posible y delegar la lógica empresarial a los servicios. Esto garantiza una separación clara de las responsabilidades y hace que el código sea más fácil de mantener y probar.
